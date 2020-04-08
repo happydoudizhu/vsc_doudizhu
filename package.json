@@ -4,23 +4,66 @@
 	"description": "",
 	"version": "0.0.1",
 	"engines": {
-		"vscode": "^1.39.0"
+		"vscode": "^1.43.0"
 	},
 	"categories": [
 		"Other"
 	],
-	"icon": "./src/img/poker.png",
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onCommand:extension.poker.ready",
+		"onCommand:extension.poker.createServer",
+		"onCommand:extension.poker.invateFriends",
+		"onCommand:extension.poker.begin",
+		"onCommand:extension.poker.out",
+		"onCommand:extension.poker.checkTableState",
+		"onCommand:extension.poker.getMyId"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "extension.poker.ready",
+				"title": "poker.ready"
+			},
+			{
+				"command": "extension.poker.createServer",
+				"title": "poker.createServer"
+			},
+			{
+				"command": "extension.poker.invateFriends",
+				"title": "poker.invateFriends"
+			},
+			{
+				"command": "extension.poker.begin",
+				"title": "开始"
+			},
+			{
+				"command": "extension.poker.out",
+				"title": "出牌"
+			},
+			{
+				"command": "extension.poker.checkTableState",
+				"title": "poker.checkTableState"
+			},
+			{
+				"command": "extension.poker.getMyId",
+				"title": "poker.getMyId"
 			}
-		]
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"when": "editorFocus && resourceLangId == json",
+					"command": "extension.poker.begin",
+					"group": "navigation"
+				},
+				{
+					"when": "editorFocus && resourceLangId == json",
+					"command": "extension.poker.out",
+					"group": "navigation"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
