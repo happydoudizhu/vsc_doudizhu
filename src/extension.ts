@@ -1,12 +1,13 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { ServerUtil } from './util';
+import { ServerUtil, PlayInfo } from './util';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 	let util = new ServerUtil();
+	let playInfo = new PlayInfo(util.getMyId());
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your have entered "happy-poker"');
@@ -35,12 +36,15 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 		}, (err) => {
 			console.log(err);
-		 });
+		});
 	});
 	let begin = vscode.commands.registerTextEditorCommand('extension.poker.begin', (editor, edit) => {
 		// 开始游戏（editor上下文命令）
 		console.log('begin');
 		util.startGame();
+		edit.delete(editor.visibleRanges[0]);
+		let position = new vscode.Position(0,0);
+		edit.insert(position, JSON.stringify(playInfo));
 	});
 	let out = vscode.commands.registerTextEditorCommand('extension.poker.out', (editor, edit) => {
 		// 出牌（editor上下文命令）

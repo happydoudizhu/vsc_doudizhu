@@ -17,7 +17,20 @@ export class ServerUtil {
     public createId() {// 创建玩家id
         return "";
     }
-    public getMyId(){// 获取我的id
+    public getMyId() {// 获取我的id
         return this.playerId;
+    }
+}
+
+export class PlayInfo {
+    public player: string;// 玩家ID
+    public tableCard: string;// 桌面最上面的牌组
+    public handCard: string;// 手牌
+    public outCard: string;// 要出的牌
+    constructor(playerId: string) {
+        this.player = playerId;
+        this.tableCard = "";
+        this.handCard = "";
+        this.outCard = "";
     }
 }
